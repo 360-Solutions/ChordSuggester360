@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Chord Progression Suggester</title>
+<style>
+  body { font-family: sans-serif; padding: 20px; background-color: #f4f4f9; color: #333; }
+  .container { max-width: 600px; margin: auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+  h1 { text-align: center; }
+  .section { margin-bottom: 20px; padding: 15px; border-left: 4px solid #5c6bc0; background-color: #e8eaf6; }
+  .chorus-option { margin-bottom: 10px; padding: 10px; background-color: #fff; border: 1px solid #ccc; border-radius: 4px; }
+  button { display: block; width: 100%; padding: 15px; font-size: 16px; background-color: #5c6bc0; color: white; border: none; border-radius: 4px; cursor: pointer; }
+  button:hover { background-color: #3f51b5; }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Songwriting Suggester</h1>
+  <button id="generateBtn">Get New Progressions</button>
+  
+  <div id="results" style="display: none; margin-top: 20px;">
+    <div class="section">
+      <h2>Part 1 (Verse / Main Idea)</h2>
+      <p id="verseText" style="font-size: 1.2em;"></p>
+    </div>
+    
+    <div class="section">
+      <h2>Part 2 (Chorus / B-Section Options)</h2>
+      <div id="chorusOptions"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const progressions = [
+    {
+      verse: "Am - G - Fmaj7 - G",
+      options: [
+        "Relative Major Lift: C - G - Am - F",
+        "Start on the IV: F - C - G - Am",
+        "Minor Focus: Dm - Am - Em - Am"
+      ]
+    },
+    {
+      verse: "Em - D - Cmaj7 - D",
+      options: [
+        "Pushing to the V: D - Em - C - D",
+        "Major Shift: G - D - C - D",
+        "Tension Bridge: Bm - C - Am - D"
+      ]
+    },
+    {
+      verse: "D - Dmaj7 - G - A",
+      options: [
+        "Relative Minor Drop: Bm - G - D - A",
+        "Start on the IV: G - A - Bm - F#m",
+        "Walking Down: Em - A - D - Bm"
+      ]
+    },
+    {
+      verse: "C - Em - F - Fm",
+      options: [
+        "Classic Lift: Am - F - C - G",
+        "Turnaround: F - G - C - Am",
+        "Tension Builder: Dm - G - E7 - Am"
+      ]
+    }
+  ];
+
+  document.getElementById('generateBtn').addEventListener('click', () => {
+    const randomIndex = Math.floor(Math.random() * progressions.length);
+    const selected = progressions[randomIndex];
+    
+    document.getElementById('verseText').innerText = selected.verse;
+    
+    const optionsContainer = document.getElementById('chorusOptions');
+    optionsContainer.innerHTML = '';
+    
+    selected.options.forEach(opt => {
+      const div = document.createElement('div');
+      div.className = 'chorus-option';
+      div.innerText = opt;
+      optionsContainer.appendChild(div);
+    });
+    
+    document.getElementById('results').style.display = 'block';
+  });
+</script>
+
+</body>
+</html>
